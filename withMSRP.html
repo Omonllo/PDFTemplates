@@ -1,0 +1,238 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: 8.3in 11.7in;
+            margin: 3cm 1.7cm 3cm 2cm;
+            padding: 0;
+            @top-center {
+                content: element(header);
+            }
+            @bottom-center {
+                content: element(footer);
+            }
+        }
+
+        table {
+            -fs-table-paginate: paginate;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        #header {
+            margin-top: 30px;
+            display: block;
+            position: running(header);
+        }
+        #header div {
+            display: inline-block;
+            vertical-align: top;
+        }
+        #leftdiv {
+            width: 5.5cm;
+            height: 1.1cm;
+        }
+        #rightdiv {
+			margin-top: 0.2cm;
+            vertical-align: top;
+            font-size: 11pt;
+            float: right;
+        }
+        #tape {
+            margin-top: 0.7cm;
+            text-align: center;
+            font-size: 0.7cm;
+        }
+        #billtotable td {
+            padding: 4px 20px 4px 0;
+        }
+        #datatable {
+            margin-top: 0.7cm;
+            width: 100%;
+            page-break-inside: auto;
+        }
+        #datatable tr{
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        #datatable th {
+            background-color: #C0C0C1;
+            text-align: left;
+            padding: 0.2cm 0 0.1cm 0.1cm;
+        }
+        #datatable td {
+            text-align: center;
+			font-size: 10pt;
+        }
+        #terms {
+            margin-top: 1cm;
+        }
+        #terms table td {
+            padding-right: 15px;
+        }
+        #footer {
+            margin-bottom: 4cm;
+            display: block;
+            position: running(footer);
+        }
+        #pagenumber:before {
+            content: counter(page);
+        }
+        #pagecount:before {
+            content: counter(pages);
+        }
+        .tableBorder {
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+        }
+        .tableBorder td {
+            border-right: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+        }
+        .tableBorder th {
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+        }
+        .lightgraycell {
+            background-color: #E4E6E4;
+        }
+    </style>
+</head>
+<body>
+#set($numAndDatesTable = $itextGenericPdfData.baseInvoice.customNumberAndDatesTable.rows)
+#set($billToAddressTable = $itextGenericPdfData.baseInvoice.customBillToAddress.rows)
+
+<div id="header">
+    <div id="leftdiv"><img src="$itextGenericPdfData.companyData.companyLogoUrl"/>
+    </div>
+    <div id="rightdiv">True value added distribution</div>
+</div>
+
+<div id="footer" align="center">
+    <div style="text-align: center; font-weight: bold; font-size: 13pt;">Office 3708 - HDS Business Centre, Cluster
+        M, Jumeirah Lakes Towers<br/>P.O. Box 112592, Dubai UAE.
+    </div>
+    <div>p: +971 4 453 9179 www.i-techdistribution.com info@i-techdistribution.com</div>
+</div>
+
+<div id="tape">Quotation</div>
+
+<table id="billtotable" style="border-collapse: collapse; margin-top: 1cm;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>Ref</td>
+        <td>:</td>
+        <td>$numAndDatesTable.get('REFERENCE').get('COLUMN_VALUE')</td>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>:</td>
+        <td>$numAndDatesTable.get('INV_DATE').get('COLUMN_VALUE')</td>
+    </tr>
+    <tr>
+        <td>Attention</td>
+        <td>:</td>
+        <td> $billToAddressTable.get('CLIENT_CONTACT').get('COLUMN_VALUE')</td>
+    </tr>
+    <tr>
+        <td>Title</td>
+        <td>:</td>
+        <td> $billToAddressTable.get('CONTACT_JOB_TITLE').get('COLUMN_VALUE')</td>
+    </tr>
+    <tr>
+        <td>Company</td>
+        <td>:</td>
+        <td>$itextGenericPdfData.companyData.companyName</td>
+    </tr>
+    <tr>
+        <td>Mobile</td>
+        <td>:</td>
+        <td>$itextGenericPdfData.companyData.companyPhone</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>:</td>
+        <td>$itextGenericPdfData.companyData.companyEmail</td>
+    </tr>
+</table>
+
+<div style="margin-top: 0.6cm;">Dear Mr., $billToAddressTable.get('NAME').get('COLUMN_VALUE')</div>
+<div style="margin-top: 0.5cm;">Thank you for your enquiry. Please find below the quotation you have requested:
+</div>
+<table id="datatable" class="tableBorder" cellspacing="0" cellpadding="0">
+    <thead>
+    <tr style="text-decoration: underline; font-weight: bold;">
+        <th>Brand</th>
+        <th>Model</th>
+        <th style="width: 3cm;">Description</th>
+        <th style="width: 1cm;">Qty</th>
+        <th>MSRP</th>
+		<th>Buy Ea</th>
+        <th>T. Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    #foreach($row in $itextGenericPdfData.baseInvoice.customProductTable.rows.values())
+    <tr>
+        <td class="lightgraycell">$row.get('ITEM_BRAND_NAME')</td>
+        <td> $row.get('NAME')</td>
+        <td>$row.get('DESCRIPTION')</td>
+        <td>$row.get('QTY_HRS')</td>
+        <td>$row.get('UNIT_PRICE')</td>
+		<td>$row.get('ITEM_ORIGINAL_PRICE')</td>
+        <td>$row.get('NET_AMOUNT')</td>
+    </tr>
+    #end
+    <tr>
+        <td class="lightgraycell"></td>
+        <td></td>
+        <td></td>
+        <td style="font-weight: bolder; padding-left: 0.2cm; text-align: justify;">Total</td>
+        <td colspan="3">$itextGenericPdfData.baseInvoice.customTotalTable.rows.get('TOTAL').get('COLUMN_VALUE')</td>
+    </tr>
+    </tbody>
+</table>
+
+<div id="terms">
+    <div><span style="font-size: 18pt; font-weight: bold; text-decoration: underline; margin-left: 2px;">Terms and Conditions:</span>
+    </div>
+    <div style="margin-top: 0.2cm;">
+        <table>
+            <tr>
+                <td>Prices:</td>
+                <td>in CURRENCY per CUSTOMER</td>
+            </tr>
+            <tr>
+                <td>Terms:</td>
+                <td>Ex-works/Ex-warehouse???</td>
+            </tr>
+            <tr>
+                <td>Payment:</td>
+                <td>100% in Advance unless otherwise agreed in advance</td>
+            </tr>
+            <tr>
+                <td>Delivery:</td>
+                <td>4 to 5 weeks from the date of payment</td>
+            </tr>
+            <tr>
+                <td>Exclusion:</td>
+                <td>Installation and commissioning.</td>
+            </tr>
+            <tr>
+                <td>Validity:</td>
+                <td>This quote is valid for a period of 30 days</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
