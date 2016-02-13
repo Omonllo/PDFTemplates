@@ -1,0 +1,78 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+form{
+    margin: 40px;
+}
+form div {
+    margin: 10px 5px;
+    width: 100%;
+}
+fieldset {
+    /*display: inline-block;
+    width: 48%;*/
+    width: 650px;
+    vertical-align: top;
+    border: 1px solid #87ceeb;
+}
+fieldset div{
+    width: 100%;
+}
+.l1{
+    /*height: 442px;*/
+}
+.l1 div{
+    vertical-align: middle;
+}
+.l2{
+    /*height: 480px;*/
+}
+.l1, .l2{
+    background: skyblue;
+    display: inline-block;
+}
+#f3{
+    margin: -200px 0 0 0;
+}
+#f4{
+    height: 225px;
+}
+legend{
+    display: none;
+    top: 50px;
+    margin: 15px;
+    /*border: 1px solid #87ceeb;
+    width: 90%;
+    color: #696969;
+    background-color: #87ceeb;*/
+}
+label {
+    display: inline-block;
+    width: 20%;
+    margin: 5px;
+    vertical-align: top;
+}
+input, select {
+    display: inline-block;
+    width: 70%;
+    margin: 5px 15px 5px 12px;
+    vertical-align: top;
+}
+.three input{
+width: 20%;
+}
+.three .disabled {
+width: 44%;
+background-color: #d3d3d3;
+cursor: not-allowed;
+color: deeppink;
+font-style: normal;
+
+}
+#slider{
+    top: 0;
+    position: fixed;
+    width: 20%;
+    margin: 0 15px 20px 0;
+}

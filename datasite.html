@@ -1,0 +1,353 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style type="text/css">
+        @page {
+            size: 8.3in 11.7in;
+            margin: 170px 30px 155px 30px;
+            padding: 0;
+            @top-center {
+                content: element(header);
+            }
+            @bottom-left {
+                content: element(footer);
+            }
+        }
+
+        #header {
+            margin: 0px 5px 20px;
+            display: block;
+            position: running(header);
+        }
+
+        #footer {
+            margin: 0px 10px;
+            display: block;
+            position: running(footer);
+        }
+
+        #pagenumber:before {
+            content: counter(page);
+        }
+
+        #pagecount:before {
+            content: counter(pages);
+        }
+
+
+        .tableBorder {
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+        }
+
+        .tableBorder td {
+            border-right: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+        }
+
+        .billAddressBorder {
+            border: 1px solid #000000;
+        }
+
+        .billAddressItemBorder {
+            border-bottom: 1px solid #000000;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+        }
+
+        .table-height td {
+            height: 35px;
+        }
+
+        .background-img {
+            background: url("https://s3.amazonaws.com:443/workforcetrack/c56895%2Fu6%2F6e104760-4553-4397-ac9f-4a4136012722") no-repeat 50% 50%;
+            font-size:14px;
+        }
+        .leftCBorder {
+            border-left: 1px solid #000000;
+        }
+
+        .leftRightCBorder {
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+        }
+        .topLeftBottomtBorder {
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+        }
+
+        .topLeftRightBorder {
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+        }
+
+        .leftBottomBorder {
+            border-left: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+        }
+        .rightBottomBorder {
+            border-right: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+        }
+
+        body {
+            font-family: Arial;
+        }
+
+        th {
+            font-family: Arial;
+            font-size: 11px;
+            font-weight: lighter;
+        }
+
+        th, td {
+            padding: 3px;
+        }
+
+        b, p, td, span, caption, hr, h1, h2, h3, h4, h5 {
+            font-family: Arial;
+        }
+
+        table {
+            -fs-table-paginate: paginate;
+        }
+        .white-space-pre {
+            font-style:italic;
+            font-weight:bolder;
+        }
+        table table {
+            padding:0;
+            margin:0;
+        }
+        .sup_table *,
+        .sup_table {
+            box-sizing:border-box;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <table width="100%">
+        <tr>
+            <td align="center">
+                <img width="100%" src="$itextGenericPdfData.companyData.companyLogoUrl"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="footer">
+    <table width="100%" style="font-size:12px;font-weight:bold;">
+        <tr>
+            <td width="41%">Received by:</td>
+            <td width="8%"></td>
+            <td width="41%" style="position: relative;">
+                <img src="https://s3.amazonaws.com:443/wfmtest/c200184%2Fu1%2F366235a5-82e7-4b8f-94a6-8b8b80378764" style="height: 101px; position: absolute; margin-top: -50px; right: 0; left: 0; padding-left: 105px;"/>
+                For: KENDAH PEST CONTROL
+            </td>
+        </tr>
+        <tr height="40">
+            <td width="41%"></td>
+            <td width="8%"></td>
+            <td width="41%"></td>
+        </tr>
+        <tr>
+            <td width="41%">Customer's Signature/Authrorized Representative</td>
+            <td width="8%"></td>
+            <td width="41%" style="position: relative;">
+                <img src="https://s3.amazonaws.com:443/wfmtest/c200184%2Fu1%2F9170b824-ee7f-498e-be03-4c2a8a42506b" style="height: 124px; position: absolute; margin-top: -50px; right: 0; left: 0; padding-left: 35px;"/>
+                Authorized Signature
+            </td>
+        </tr>
+    </table>
+
+    <table align="center" width="100%">
+        <tr>
+            <td align="center">
+                <img width="100%" src="https://s3.amazonaws.com:443/wfmtest/000000000000%2Fpublic%2F23039%2Fce5659ee-1b3c-46e1-9e03-d393783c9add"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="background-img">
+    #set($curSymbol = $itextGenericPdfData.baseInvoice.currency)
+    #set($curName = $itextGenericPdfData.baseInvoice.currencyName)
+    #set($numAndDatesTable = $itextGenericPdfData.baseInvoice.customNumberAndDatesTable.rows)
+    #set($billToAddressTable = $itextGenericPdfData.baseInvoice.customBillToAddress.rows)
+    #set($notes = $itextGenericPdfData.baseInvoice.notes.rows)
+
+    <table width="100%" style="font-size:11px;">
+        <tr>
+            <td align="center" style="font-size:30px;font-weight:bold;">
+                Proforma Invoice
+            </td>
+        </tr>
+    </table>
+    <table width="100%" style="margin-top:45px;">
+        <tr>
+            <td width="50%">
+                <table width="100%" cellspacing="0" cellpadding="0" class="table-height">
+                    <tr>
+                        <td class="billAddressBorder" style="font-weight:bold;font-size:14px;"><b>Client:</b></td>
+                    </tr>
+                    <tr>
+                        <td class="billAddressItemBorder" style="height: 70px;">
+                            #set($clientName=$billToAddressTable.get('NAME').get('COLUMN_VALUE'))
+                            #set($clientContacName=$billToAddressTable.get('CLIENT_CONTACT').get('COLUMN_VALUE'))
+                            #set($clientContacPhoneNum=$billToAddressTable.get('CONTACT_PHONE').get('COLUMN_VALUE'))
+                            #set($contactEmail=$billToAddressTable.get('CONTACT_EMAIL').get('COLUMN_VALUE'))
+                            #set($clientAddress=$billToAddressTable.get('BILL_ADDRESS').get('COLUMN_VALUE'))
+
+                            #if($billToAddressTable.get('BILL_CITY').get('COLUMN_VALUE')!='' and
+                            $billToAddressTable.get('BILL_ZIPCODE').get('COLUMN_VALUE')!='')
+                            #set($clientCityZip=$billToAddressTable.get('BILL_CITY').get('COLUMN_VALUE') + ',' +
+                            $billToAddressTable.get('BILL_ZIPCODE').get('COLUMN_VALUE'))
+                            #elseif($billToAddressTable.get('BILL_CITY').get('COLUMN_VALUE')!='')
+                            #set($clientCityZip=$billToAddressTable.get('BILL_CITY').get('COLUMN_VALUE'))
+                            #elseif($billToAddressTable.get('BILL_ZIPCODE').get('COLUMN_VALUE')!='')
+                            #set($clientCityZip=$billToAddressTable.get('BILL_ZIPCODE').get('COLUMN_VALUE'))
+                            #end
+
+                            #set($clientCountry=$billToAddressTable.get('BILL_COUNTRY').get('COLUMN_VALUE'))
+                            #set($clientVatNumber=$billToAddressTable.get('CLIENT_VAT_NUMBER').get('COLUMN_VALUE'))
+
+                            <!--Client Name-->
+                            #if($clientName!='')
+                            $clientName <br/>
+                            #end
+                            <!--Address-->
+                            #if($clientAddress!='')
+                            $clientAddress <br/>
+                            #end
+                            <!--City, ZipCode-->
+                            #if($clientCityZip!='')
+                            $clientCityZip <br/>
+                            #end
+                            <!--Country-->
+                            #if($clientCountry!='')
+                            $clientCountry <br/>
+                            #end
+                            <!--Client VAT Number-->
+                            #if($clientVatNumber!='')
+                            $clientVatNumber <br/>
+                            #end
+                            <!--Client Contact Name-->
+                            #if($clientContacName!='')
+                            <b>Attn: </b> $clientContacName <br/>
+                            #end
+                            <!--Client Phone Number-->
+                            #if($clientContacPhoneNum!='')
+                            Tel: $clientContacPhoneNum <br/>
+                            #end
+                            <!--Client Phone Number-->
+                            #if($contactEmail!='')
+                            E-mail: $contactEmail <br/>
+                            #end
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="20%">
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100%" valign="top">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="30%" valign="bottom">
+                <table width="100%" cellspacing="0" cellpadding="0" class="tableBorder table-height">
+                    #set($invDateLabel=$numAndDatesTable.get('INV_DATE').get('COLUMN_NAME'))
+                    #set($invReferenceNumLabel=$numAndDatesTable.get('REFERENCE').get('COLUMN_NAME'))
+                    #set($invoiceDate=$numAndDatesTable.get('INV_DATE').get('COLUMN_VALUE'))
+                    #set($invReferenceNumber=$numAndDatesTable.get('REFERENCE').get('COLUMN_VALUE'))
+                    <tr>
+                        <td width="50%" align="center" style="font-weight:bold;font-size:14px;">Date</td>
+                        <td width="50%" align="center" style="font-weight:bold;font-size:14px;">PI Ref. No.</td>
+                    </tr>
+                    <tr>
+                        <td width="50%" align="center">$invoiceDate</td>
+                        <td width="50%" align="center">$invReferenceNumber</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!--Product Table-->
+    <div style="background: url('https://s3.amazonaws.com:443/workforcetrack/000000000000%2Fpublic%2F56895%2F7df9aced-caa5-4c09-96aa-1e5986a57e07') repeat-y 60% 0; width:100%; margin-bottom:-2px;">
+        <div style="background: url('https://s3.amazonaws.com:443/workforcetrack/000000000000%2Fpublic%2F56895%2F7df9aced-caa5-4c09-96aa-1e5986a57e07') repeat-y 70% 0; width:100%;">
+            <div style="background: url('https://s3.amazonaws.com:443/workforcetrack/000000000000%2Fpublic%2F56895%2F7df9aced-caa5-4c09-96aa-1e5986a57e07') repeat-y 80% 0; width:100%;">
+                <div style="background: url('https://s3.amazonaws.com:443/workforcetrack/000000000000%2Fpublic%2F56895%2F7df9aced-caa5-4c09-96aa-1e5986a57e07') repeat-y 90% 0; width:100%;">
+                    <table width="100%" class="table-height" align="center" cellspacing="0" cellpadding="0" style="margin-top:20px;">
+                        <tr align="center">
+                            <td width="60%" style="border-left: 1px solid #000; border-bottom: 1px solid #000000; border-top: 1px solid #000000;">Description</td>
+                            <td width="10%" style="border-bottom: 1px solid #000000; border-top: 1px solid #000000;">Qty</td>
+                            <td width="10%" style="border-bottom: 1px solid #000000; border-top: 1px solid #000000;">U/M</td>
+                            <td width="10%" style="border-bottom: 1px solid #000000; border-top: 1px solid #000000;">Rate</td>
+                            <td width="10%" style="border-bottom: 1px solid #000000; border-top: 1px solid #000000; border-right:1px solid #000;">Amount</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="border-left: 1px solid #000000; border-right: 1px solid #000000; vertical-align:top; padding:0; margin:0; min-height:300px; border-bottom:1px solid #000;">
+                                <table width="100%" class="table-height" cellspacing="0" cellpadding="0">
+                                    #set($customTotalTable = $itextGenericPdfData.baseInvoice.customTotalTable.rows)
+                                    #foreach($row in $itextGenericPdfData.baseInvoice.customProductTable.rows.values())
+                                    <tr>
+                                        <td valign="top" style="width:60%"> $row.get('DESCRIPTION').replaceAll('\n','<br />')</td>
+                                        <td align="right" valign="top" style="width:10%;"> $row.get('QTY_HRS')</td>
+                                        <td align="right" valign="top" style="width:10%;"> $row.get('UNIT_MEASUREMENT')</td>
+                                        <td align="right" valign="top" style="width:10%;"> $row.get('UNIT_PRICE')</td>
+                                        <td align="right" valign="top" style="width:10%;"> $row.get('TOTAL_AMOUNT')</td>
+                                    </tr>
+                                    #end
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height:100%; vertical-align:middle;" class="leftBottomBorder"><b>This Proforma Invoice is Official and Original</b></td>
+                            <td style="width:10%; border-bottom:1px solid #000;"></td>
+                            <td style="width:10%; border-bottom:1px solid #000;"></td>
+                            <td style="width:10%; border-bottom:1px solid #000;"></td>
+                            <td style="width:10%;" class="rightBottomBorder"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin:0 -4px; position:relative; left:-2px;">
+        <table width="100%">
+            <tr>
+                <td style="font-size:14px; width:80%"></td>
+                <td class="leftBottomBorder rightBottomBorder" style="padding:0;">
+                    <table width="100%">
+                        <tr><td width="30%">$customTotalTable.get('TOTAL').get('COLUMN_NAME'):</td><td style="text-align:right;"><b>$curName
+                            $customTotalTable.get('TOTAL').get('COLUMN_VALUE')</b></td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    #set($rows = $itextGenericPdfData.baseInvoice.customTermsConditions.rows.values())
+    #if($rows.size()>0)
+    <table width="100%" align="bottom" valign="bottom" style="margin-left: 15px;font-size:14px">
+        <tr>
+
+            <td style="font-weight:bold;"><b>Notes:</b></td>
+        </tr>
+        <tr>
+            <td class="white-space-pre">
+                #foreach($row in $rows)
+                $row.get('COLUMN_VALUE').replaceAll('\n','<br />')
+                #end
+            </td>
+        </tr>
+    </table>
+    #end
+
+</div>
+</body>
+</html>
